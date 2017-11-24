@@ -87,8 +87,11 @@ public class MainActivity extends BlunoLibrary {
         SharedPreferences sp = getSharedPreferences("MyPrefs", MODE_PRIVATE);
         sp = getApplicationContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
         edit = sp.edit();
+
+        /*Todos los serialReceivedText los uso si quiero que se muestre un valor en la parte superior de la pantalla para probar
         serialReceivedText = (TextView) findViewById(R.id.serialReceivedText);    //initial the EditText of the received data
         serialReceivedText.setText(sp.getString("valorrecibido", null));
+        */
 
         nombrecontacto1 = (TextView) findViewById(R.id.nombrecontacto1);
         telefonocontacto1 = (TextView) findViewById(R.id.telefonocontacto1);
@@ -229,12 +232,14 @@ public class MainActivity extends BlunoLibrary {
                             @Override
                             public void run() {
                                 SharedPreferences sp = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-                                serialReceivedText.setText(sp.getString("valorrecibido", null));
+                                // Esto lo habilito si quiero que se muestre un uno o un cero en la pantalla
+                                // serialReceivedText.setText(sp.getString("valorrecibido", null));
                                 String valor = sp.getString("valorrecibido", null);
                                 if (valor == "0"){
                                 }
                                 if (valor == "1"){
-                                    Toast.makeText(getApplicationContext(), "El botón fue presionado", Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(getApplicationContext(), "El botón fue presionado", Toast.LENGTH_SHORT).show();
+                                    sendSMS();
                                 }
                             }
                         });
@@ -666,28 +671,18 @@ public class MainActivity extends BlunoLibrary {
         }
     }
 
-    /*@Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.botonHelpp:
-                sendSMS();
-                break;
-            default:
-                break;
-        }
-
-    }
-    */
-
     public void botonHelpp(View v) {
         sendSMS();
     }
 
     private void sendSMS() {
-       Toast.makeText(getApplicationContext(), "Debe seleccionar al menos un contacto.", Toast.LENGTH_LONG).show();
-/*
-        String mensaje1final=sp.getString("mensaje1", "DEFAULT");
-        String mensaje2final=sp.getString("mensaje2", "DEFAULT");
+        //Toast.makeText(getApplicationContext(), "Debe seleccionar al menos un contacto.", Toast.LENGTH_LONG).show();
+        //smsManager.sendTextMessage("+573148894999", null, "holi", null, null);
+
+        //String mensaje1final=sp.getString("mensaje1", "DEFAULT");
+        //String mensaje2final=sp.getString("mensaje2", "DEFAULT");
+        String mensaje1final=mensaje1.getText().toString();
+        String mensaje2final=mensaje2.getText().toString();
         String contacto1sms = telefonocontacto1.getText().toString();
         String contacto2sms = telefonocontacto2.getText().toString();
         String contacto3sms = telefonocontacto3.getText().toString();
@@ -737,7 +732,7 @@ public class MainActivity extends BlunoLibrary {
                 Toast.makeText(getApplicationContext(), "Mensaje enviado.", Toast.LENGTH_LONG).show();
             }
         }
-     */
+
     }
 
 }
